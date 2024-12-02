@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polls Index</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+            background-color: #f8f9fa; /* Light gray background */
+        }
+        .poll {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #e9ecef; /* Light border */
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            background-color: #ffffff; /* White background */
+        }
+        .poll:hover {
+            background-color: #f2f4f7; /* Light gray hover */
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .list-group {
+            margin-top: 20px;
+        }
+        .list-group-item {
+            background-color: #ffffff; /* White background */
+            border: 1px solid #e9ecef; /* Light border */
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .list-group-item:hover {
+            background-color: #f2f4f7; /* Light gray hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-4">Polls</h1>
+        <div class="list-group">
+            {% if latest_question_list %}
+                {% for question in latest_question_list %}
+                    <a href="{% url 'polls:detail' question.id %}" class="list-group-item list-group-item-action poll">
+                        <span style="color: #6c757d;">{{ question.Question_text }}</span> <!-- Cozy gray text color -->
+                    </a>
+                {% endfor %}
+            {% else %}
+                <p>No polls are available.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

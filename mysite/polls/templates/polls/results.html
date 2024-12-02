@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results for {{ question.question_text }}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+            background-color: #f8f9fa; /* Light gray background */
+        }
+        .question-text {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #495057; /* Dark gray text color */
+        }
+        .result-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #ffffff; /* White background */
+            border: 1px solid #e9ecef; /* Light border */
+            border-radius: 5px;
+        }
+        .result-item:hover {
+            background-color: #f2f4f7; /* Light gray hover */
+        }
+        .result-text {
+            color: #495057; /* Dark gray text color for results */
+        }
+        .vote-count {
+            font-weight: bold;
+            color: #007bff; /* Blue color for vote count */
+        }
+        .btn-primary {
+            background-color: #007bff; /* Primary button color */
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3; /* Darker hover color */
+            border-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-4">Results for "{{ question.question_text }}"</h1>
+        <div class="result-list">
+            {% if question.choice_set.all %}
+                {% for choice in question.choice_set.all %}
+                    <div class="result-item">
+                        <p class="result-text">{{ choice.choice_text }}</p>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: {{ choice.percentage_of_votes|floatformat:"0" }}%;" aria-valuenow="{{ choice.votes }}" aria-valuemin="0" aria-valuemax="{{ question.total_votes }}">
+                                <span class="vote-count">{{ choice.votes }}</span> votes
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No choices available for this question.</p>
+            {% endif %}
+        </div>
+        <a href="{% url 'polls:index' %}" class="btn btn-primary">Back to Polls</a>
+    </div>
+</body>
+</html>
