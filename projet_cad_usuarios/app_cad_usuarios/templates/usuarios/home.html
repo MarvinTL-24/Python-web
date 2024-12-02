@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enquete</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'projet_cad_usuarios/templates/usuarios/head.html.php' %}">
+</head>
+<body>
+
+    <!-- Cabeçalho -->
+    <header>
+        <h1>Participe da Enquete!</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'usuarios:perfil' %}">Meu Perfil</a></li>
+                <li><a href="{% url 'usuarios:logout' %}">Sair</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Exibindo a Enquete -->
+    <section class="enquete">
+        <form method="POST" action="{% url 'usuarios:responder_enquete' %}">
+            {% csrf_token %}
+            
+            <h2>{{ enquetes.0.pergunta }}</h2>
+            <ul>
+                {% for alternativa in enquetes.0.alternativas.all %}
+                    <li>
+                        <input type="radio" name="alternativa_{{ enquetes.0.id }}" value="{{ alternativa.id }}" id="alternativa_{{ alternativa.id }}">
+                        <label for="alternativa_{{ alternativa.id }}">{{ alternativa.texto }}</label>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <h2>{{ enquetes.1.pergunta }}</h2>
+            <ul>
+                {% for alternativa in enquetes.1.alternativas.all %}
+                    <li>
+                        <input type="radio" name="alternativa_{{ enquetes.1.id }}" value="{{ alternativa.id }}" id="alternativa_{{ alternativa.id }}">
+                        <label for="alternativa_{{ alternativa.id }}">{{ alternativa.texto }}</label>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <h2>{{ enquetes.2.pergunta }}</h2>
+            <ul>
+                {% for alternativa in enquetes.2.alternativas.all %}
+                    <li>
+                        <input type="radio" name="alternativa_{{ enquetes.2.id }}" value="{{ alternativa.id }}" id="alternativa_{{ alternativa.id }}">
+                        <label for="alternativa_{{ alternativa.id }}">{{ alternativa.texto }}</label>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <button type="submit">Enviar Respostas</button>
+        </form>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2024 Enquete Sistema</p>
+    </footer>
+
+</body>
+</html>
