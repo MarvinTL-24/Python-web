@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Results for {{ question.question_text }}</title>
+    <title>Resultados: {{ question.question_text }}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
@@ -44,7 +44,7 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="my-4">Results for "{{ question.question_text }}"</h1>
+        <h1 class="my-4">Os resultados foram: "{{ question.question_text }}"</h1>
         <div class="result-list">
             {% if question.choice_set.all %}
                 {% for choice in question.choice_set.all %}
@@ -52,16 +52,16 @@
                         <p class="result-text">{{ choice.choice_text }}</p>
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" style="width: {{ choice.percentage_of_votes|floatformat:"0" }}%;" aria-valuenow="{{ choice.votes }}" aria-valuemin="0" aria-valuemax="{{ question.total_votes }}">
-                                <span class="vote-count">{{ choice.votes }}</span> votes
+                                <span class="vote-count">{{ choice.votes }}</span> Votos
                             </div>
                         </div>
                     </div>
                 {% endfor %}
             {% else %}
-                <p>No choices available for this question.</p>
+                <p>Não há opções disponíveis para esta pergunta.</p>
             {% endif %}
         </div>
-        <a href="{% url 'polls:index' %}" class="btn btn-primary">Back to Polls</a>
+        <a href="{% url 'polls:index' %}" class="btn btn-primary">Voltar para enquetes</a>
     </div>
 </body>
 </html>

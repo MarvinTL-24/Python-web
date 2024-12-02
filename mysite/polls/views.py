@@ -15,7 +15,7 @@ class IndexView(generic.ListView):
     context_object_name = "latest_question_list"
 
     def get_queryset(self):
-        """Return the last five published questions."""
+        """Devolva as últimas cinco perguntas publicadas."""
         return Question.objects.filter(publish_data__lte=timezone.now()).order_by("-publish_data")[:5]
 
 
@@ -39,11 +39,11 @@ def vote(request, question_id):
             "polls/detail.html",
             {
                 "question": question,
-                "error_message": "You didn't select a choice.",
+                "error_message": "Você não selecionou uma opção.",
             },
         )
     else:
-        selected_choice.votes = F("votes") + 1
+        selected_choice.votes = F("Votos") + 1
         selected_choice.save()
 
         return HttpResponseRedirect(reverse("polls:results", args=(question.id,)))
