@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,44 +7,67 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
-            padding: 20px;
-            background-color: #f8f9fa; /* Light gray background */
+            padding: 0;
+            background-color: #f4f6f9; /* Cor de fundo suave */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        .question-text {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: #495057; /* Dark gray text color */
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+        h1 {
+            font-size: 2rem;
+            text-align: center;
+            color: #007bff; /* Cor azul para o título */
         }
         .result-item {
-            margin-bottom: 10px;
-            padding: 10px;
-            background-color: #ffffff; /* White background */
-            border: 1px solid #e9ecef; /* Light border */
-            border-radius: 5px;
+            margin-bottom: 15px;
+            padding: 15px;
+            background-color: #ffffff; /* Cor de fundo branca */
+            border: 1px solid #e9ecef; /* Borda leve */
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
         }
         .result-item:hover {
-            background-color: #f2f4f7; /* Light gray hover */
+            background-color: #f2f4f7; /* Cor de fundo ao passar o mouse */
         }
         .result-text {
-            color: #495057; /* Dark gray text color for results */
+            color: #495057; /* Cor escura para o texto */
+            font-size: 1.2rem;
         }
         .vote-count {
             font-weight: bold;
-            color: #007bff; /* Blue color for vote count */
+            color: #007bff; /* Cor azul para o número de votos */
+        }
+        .progress {
+            height: 20px;
+            border-radius: 10px;
+            background-color: #e9ecef; /* Cor de fundo da barra de progresso */
+        }
+        .progress-bar {
+            border-radius: 10px;
         }
         .btn-primary {
-            background-color: #007bff; /* Primary button color */
-            border-color: #007bff;
+            background-color: #28a745; /* Cor verde para o botão */
+            border-color: #28a745;
+            border-radius: 30px; /* Bordas arredondadas */
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            width: 100%;
         }
         .btn-primary:hover {
-            background-color: #0056b3; /* Darker hover color */
-            border-color: #0056b3;
+            background-color: #218838; /* Cor mais escura ao passar o mouse */
+            border-color: #1e7e34;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 class="my-4">Os resultados foram: "{{ question.question_text }}"</h1>
+        <h1 class="my-4">Os resultados da enquete: "{{ question.question_text }}"</h1>
         <div class="result-list">
             {% if question.choice_set.all %}
                 {% for choice in question.choice_set.all %}
@@ -61,7 +84,7 @@
                 <p>Não há opções disponíveis para esta pergunta.</p>
             {% endif %}
         </div>
-        <a href="{% url 'polls:index' %}" class="btn btn-primary">Voltar para enquetes</a>
+        <a href="{% url 'polls:index' %}" class="btn btn-primary">Voltar para as enquetes</a>
     </div>
 </body>
 </html>

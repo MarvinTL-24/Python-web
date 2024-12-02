@@ -1,38 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Polls Index</title>
+    <title>Índice de Enquetes</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
-            padding: 20px;
-            background-color: #f8f9fa; /* Light gray background */
+            padding: 0;
+            background-color: #f4f6f9; /* Cor de fundo suave */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+        h1 {
+            font-size: 2rem;
+            text-align: center;
+            color: #007bff; /* Cor azul para o título */
         }
         .poll {
-            padding: 10px;
+            padding: 15px;
             margin: 10px 0;
-            border: 1px solid #e9ecef; /* Light border */
-            border-radius: 5px;
+            border: 1px solid #e9ecef; /* Borda leve */
+            border-radius: 8px;
             transition: all 0.3s ease;
-            background-color: #ffffff; /* White background */
+            background-color: #ffffff; /* Cor de fundo branca */
         }
         .poll:hover {
-            background-color: #f2f4f7; /* Light gray hover */
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            background-color: #f2f4f7; /* Cor de fundo quando passa o mouse */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
         }
         .list-group {
             margin-top: 20px;
         }
         .list-group-item {
-            background-color: #ffffff; /* White background */
-            border: 1px solid #e9ecef; /* Light border */
-            border-radius: 5px;
+            background-color: #ffffff; /* Cor de fundo branca */
+            border: 1px solid #e9ecef; /* Borda leve */
+            border-radius: 8px;
             transition: background-color 0.3s ease;
         }
         .list-group-item:hover {
-            background-color: #f2f4f7; /* Light gray hover */
+            background-color: #f2f4f7; /* Cor de fundo quando passa o mouse */
         }
     </style>
 </head>
@@ -43,7 +57,7 @@
             {% if latest_question_list %}
                 {% for question in latest_question_list %}
                     <a href="{% url 'polls:detail' question.id %}" class="list-group-item list-group-item-action poll">
-                        <span style="color: #6c757d;">{{ question.Question_text }}</span> <!-- Cozy gray text color -->
+                        <span style="color: #6c757d;">{{ question.Question_text }}</span> <!-- Texto em cinza aconchegante -->
                     </a>
                 {% endfor %}
             {% else %}
