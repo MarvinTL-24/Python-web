@@ -6,10 +6,10 @@
     <title>Índice de Enquetes</title>
     <style>
         body {
-            padding: 0;
-            background-color: #f4f6f9; /* Cor de fundo suave */
+            margin: 0;
+            background: linear-gradient(135deg, #f4f6f9, #e2e8f0); /* Fundo degradê */
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -17,50 +17,66 @@
         .container {
             max-width: 800px;
             width: 100%;
+            background-color: #ffffff; /* Fundo branco */
+            border-radius: 10px; /* Bordas arredondadas */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra leve */
+            padding: 20px;
         }
         h1 {
-            font-size: 2rem;
+            font-size: 2.5rem;
             text-align: center;
-            color: #007bff; /* Cor azul para o título */
+            color: #007bff; /* Azul elegante */
+            margin-bottom: 20px;
         }
         .poll {
-            padding: 15px;
+            padding: 20px;
             margin: 10px 0;
             border: 1px solid #e9ecef; /* Borda leve */
             border-radius: 8px;
             transition: all 0.3s ease;
-            background-color: #ffffff; /* Cor de fundo branca */
+            background-color: #f8fafc; /* Fundo suave */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         .poll:hover {
-            background-color: #f2f4f7; /* Cor de fundo quando passa o mouse */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+            background-color: #e9ecef; /* Fundo destacado ao passar o mouse */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave ao hover */
+            transform: scale(1.02); /* Leve aumento no hover */
         }
-        .list-group {
-            margin-top: 20px;
+        .poll span {
+            font-size: 1.2rem;
+            color: #343a40; /* Texto escuro */
         }
-        .list-group-item {
-            background-color: #ffffff; /* Cor de fundo branca */
-            border: 1px solid #e9ecef; /* Borda leve */
-            border-radius: 8px;
-            transition: background-color 0.3s ease;
+        .poll .arrow {
+            font-size: 1.5rem;
+            color: #007bff; /* Ícone azul */
+            transition: transform 0.3s ease;
         }
-        .list-group-item:hover {
-            background-color: #f2f4f7; /* Cor de fundo quando passa o mouse */
+        .poll:hover .arrow {
+            transform: translateX(5px); /* Mover seta no hover */
+        }
+        .no-enquetes {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #6c757d; /* Texto cinza */
+            padding: 20px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 class="my-4">Enquetes</h1>
+        <h1>Enquetes</h1>
         <div class="list-group">
             {% if latest_question_list %}
                 {% for question in latest_question_list %}
                     <a href="{% url 'polls:detail' question.id %}" class="list-group-item list-group-item-action poll">
-                        <span style="color: #6c757d;">{{ question.Question_text }}</span> <!-- Texto em cinza aconchegante -->
+                        <span>{{ question.Question_text }}</span>
+                        <span class="arrow">→</span>
                     </a>
                 {% endfor %}
             {% else %}
-                <p>Não há enquetes disponíveis.</p>
+                <p class="no-enquetes">Não há enquetes disponíveis no momento.</p>
             {% endif %}
         </div>
     </div>
