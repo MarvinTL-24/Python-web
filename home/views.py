@@ -1,5 +1,5 @@
 from decimal import Decimal
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Produto
 
 def home(request):
@@ -47,3 +47,31 @@ def home(request):
     }
 
     return render(request, 'home/home.html', context)
+
+def editar_produto(request, produto_id):
+    produto = get_object_or_404(Produto, id=produto_id)
+
+    if request.method == 'POST':
+        nome = request.POST.get("nome")
+        quantidade = int(request.POST.get("quantidade"))
+        valor = float(request.POST.get("valor"))
+
+        if nome and quantidade > 0 and valor > 0:
+            produto.nome = nome
+            produto.quantidade = quantidade
+            produto.valor = valor
+            produto.save()
+
+            return redirect('home')
+
+    context = {
+        'produto': produto
+    }
+
+    return render(request, 'home/editar_produto.html', context)
+
+
+def deletar_produto(request, produto_id):
+    produto = get_object_or_404(Produto, id=produto_id)
+    produto.delete()
+    return redirect('home')

@@ -13,7 +13,7 @@
             margin: 0;
             padding: 20px;
         }
-        
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -21,13 +21,13 @@
             background-color: white;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        
+
         h1 {
             text-align: center;
             color: #007BFF;
             margin-bottom: 20px;
         }
-        
+
         form {
             background-color: #f9f9f9;
             padding: 20px;
@@ -35,12 +35,12 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             margin-bottom: 30px;
         }
-        
+
         label {
             font-weight: bold;
             margin-top: 10px;
         }
-        
+
         input[type="text"], input[type="number"] {
             width: 100%;
             padding: 8px;
@@ -49,7 +49,7 @@
             border-radius: 4px;
             box-sizing: border-box;
         }
-        
+
         button {
             width: 100%;
             padding: 10px;
@@ -61,57 +61,101 @@
             border-radius: 5px;
             margin-top: 15px;
         }
-        
+
         button:hover {
             background-color: #218838;
         }
-        
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 30px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        
+
         th, td {
             padding: 12px;
             text-align: center;
             border: 1px solid #ddd;
         }
-        
+
         th {
             background-color: #007BFF;
             color: white;
         }
-        
+
         td {
             background-color: #f9f9f9;
         }
-        
+
         tr:nth-child(even) td {
             background-color: #f1f1f1;
         }
-        
+
         tr:hover td {
             background-color: #f1f1f1;
         }
-        
+
         tfoot td {
             font-weight: bold;
             background-color: #f4f4f4;
         }
-        
+
         .total {
             font-size: 18px;
             font-weight: bold;
             text-align: right;
             margin-top: 20px;
         }
-        
+
         .discount {
             font-size: 16px;
             color: #e74c3c;
         }
+
+        /* Estilo dos botões de Editar e Deletar */
+    .button-group {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .button-group a,
+    .button-group form button {
+        padding: 8px 16px;
+        font-size: 14px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        display: inline-block; /* Certifica-se de que o link se comporta como bloco, assim como o botão */
+        height: 40px; /* Garantir que os botões tenham a mesma altura */
+        line-height: 24px; /* Alinha o texto verticalmente */
+        text-align: center; /* Garante que o texto fique centralizado no botão */
+    }
+
+    .button-group a {
+        background-color: #007BFF;
+        color: white;
+        text-decoration: none;
+    }
+
+    .button-group a:hover {
+        background-color: #0056b3;
+    }
+
+    .button-group form button {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    .button-group form button:hover {
+        background-color: #c82333;
+    }
+
+    .button-group form {
+        display: inline; /* Garante que o formulário de deletar seja exibido na linha com o link */
+    }
+
     </style>
 </head>
 <body>
@@ -149,6 +193,7 @@
                     <th>Quantidade</th>
                     <th>Valor Unitário (R$)</th>
                     <th>Total (R$)</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -159,6 +204,15 @@
                     <td>{{ produto.quantidade }}</td>
                     <td>{{ produto.valor }}</td>
                     <td>{{ produto.total }}</td>
+                    <td class="button-group">
+                        <!-- Botão de editar -->
+                        <a href="{% url 'editar_produto' produto.id %}">Editar</a>
+                        <!-- Botão de deletar -->
+                        <form action="{% url 'deletar_produto' produto.id %}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit">Deletar</button>
+                        </form>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
