@@ -1,8 +1,7 @@
 from django.contrib import admin
-from django.urls import path
-from home import views
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),  # Mantém o painel administrativo
-    path('', views.home, name='home.html')  # Define a rota raiz como página inicial
+    path('', include('home.urls')),  # Define a página inicial para o app "home"
 ]
