@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpRequest
 
 def home(request):
-    return HttpRequest("Bem vindo.")
+    return render(request, 'home.html')  # Renderiza o template "home.html"

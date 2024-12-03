@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Produtos</title>
+</head>
+<body>
+    <h1>Carrinho de Compras</h1>
+    <table>
+        <tr>
+            <th>Nome</th>
+            <th>Quantidade</th>
+            <th>Valor</th>
+            <th>Total</th>
+            <th>Ações</th>
+        </tr>
+        {% for produto in produtos %}
+        <tr>
+            <td>{{ produto.nome }}</td>
+            <td>{{ produto.quantidade }}</td>
+            <td>R$ {{ produto.valor }}</td>
+            <td>R$ {{ produto.total }}</td>
+            <td>
+                <a href="{% url 'editar_produto' produto.id %}">Editar</a>
+                <a href="{% url 'deletar_produto' produto.id %}">Deletar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <p>Total: R$ {{ total_valor }}</p>
+    <p>Desconto: {{ desconto|floatformat:2 }}</p>
+    <p>Total com Desconto: R$ {{ total_com_desconto|floatformat:2 }}</p>
+    <a href="{% url 'adicionar_produto' %}">Adicionar Produto</a>
+</body>
+</html>
