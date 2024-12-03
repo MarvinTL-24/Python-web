@@ -55,8 +55,8 @@ ROOT_URLCONF = 'projeto.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
+        'DIRS': [BASE_DIR,'templates/home/home.html'],  # Pode adicionar outros diretórios aqui, se necessário
+        'APP_DIRS': True,  # Habilita busca automática em diretórios 'templates' dos apps
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -67,6 +67,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'projeto.wsgi.application'
 
@@ -115,8 +116,17 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
+# settings.py
 
-STATIC_URL = 'static/'
+# URL para arquivos estáticos
+STATIC_URL = '/static/'
+
+# Diretório local onde os arquivos estáticos serão armazenados
+STATICFILES_DIRS = [
+    BASE_DIR / 'home/static',  # Caminho para a pasta 'static' dentro do seu app
+]
+# Quando rodar o collectstatic em produção, onde os arquivos serão armazenados
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
